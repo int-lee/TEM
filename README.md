@@ -9,7 +9,51 @@
 
 This repository contains the PyTorch implementation of the **Transformer Energy-Based Model (TEM)**. TEM is a contrastively trained energy-based model (EBM) that generates high-fidelity ImageNet images using Langevin MCMC without classifier-free guidance.
 
+### Samples
 
+Class-conditional ImageNet samples, no classifier-free guidance.
+
+**256×256**
+
+<p align="center">
+  <img src="samples/imagenet_samples/class_0007.png" width="12%">
+  <img src="samples/imagenet_samples/class_0012.png" width="12%">
+  <img src="samples/imagenet_samples/class_0022.png" width="12%">
+  <img src="samples/imagenet_samples/class_0032.png" width="12%">
+  <img src="samples/imagenet_samples/class_0105.png" width="12%">
+  <img src="samples/imagenet_samples/class_0109.png" width="12%">
+  <img src="samples/imagenet_samples/class_0113.png" width="12%">
+  <img src="samples/imagenet_samples/class_0207.png" width="12%">
+</p>
+
+<p align="center">
+  <img src="samples/imagenet_samples/class_0282.png" width="12%">
+  <img src="samples/imagenet_samples/class_0302.png" width="12%">
+  <img src="samples/imagenet_samples/class_0324.png" width="12%">
+  <img src="samples/imagenet_samples/class_0331.png" width="12%">
+  <img src="samples/imagenet_samples/class_0337.png" width="12%">
+  <img src="samples/imagenet_samples/class_0390.png" width="12%">
+  <img src="samples/imagenet_samples/class_0397.png" width="12%">
+  <img src="samples/imagenet_samples/class_0403.png" width="12%">
+</p>
+
+<p align="center">
+  <img src="samples/imagenet_samples/class_0649.png" width="12%">
+  <img src="samples/imagenet_samples/class_0672.png" width="12%">
+  <img src="samples/imagenet_samples/class_0730.png" width="12%">
+  <img src="samples/imagenet_samples/class_0755.png" width="12%">
+  <img src="samples/imagenet_samples/class_0825.png" width="12%">
+  <img src="samples/imagenet_samples/class_0937.png" width="12%">
+  <img src="samples/imagenet_samples/class_0985.png" width="12%">
+  <img src="samples/imagenet_samples/class_0996.png" width="12%">
+</p>
+
+**512×512**
+
+<p align="center">
+  <img src="samples/imagenet_samples/class0090_n01820546.png" width="40%">
+  <img src="samples/imagenet_samples/class0279_n02120079.png" width="40%">
+</p>
 
 ## Results
 
@@ -28,6 +72,30 @@ Inference-time scaling for TEM-XL/2 at 256×256 (step size 500):
 | 40 | 7.63 | 106.0 | 0.65 | 0.65 |
 | 60 | 3.82 | 176.2 | 0.76 | 0.57 |
 | 80 | 4.72 | 221.1 | 0.81 | 0.51 |
+
+
+
+**Langevin sampling trajectory.** Each row is one chain started from Gaussian noise, shown every 20 steps (steps 0, 20, …, 120).
+
+<p align="center">
+  <img src="samples/imagenet_samples/single_steps_cls113_B_step120_every20/step0000.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls113_B_step120_every20/step0020.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls113_B_step120_every20/step0040.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls113_B_step120_every20/step0060.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls113_B_step120_every20/step0080.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls113_B_step120_every20/step0100.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls113_B_step120_every20/step0120.png" width="13%">
+</p>
+
+<p align="center">
+  <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0000.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0020.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0040.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0060.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0080.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0100.png" width="13%">
+  <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0120.png" width="13%">
+</p>
 
 Pretrained checkpoints: TODO.
 
