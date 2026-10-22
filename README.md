@@ -73,24 +73,7 @@ torchrun --nproc_per_node=4 --standalone train.py \
 
 Every option is a command-line flag (`python train.py -h`):
 
-| Flag | Default | Paper |
-|---|---|---|
-| `--model_size` | `L` | TEM-S/B/L/XL, patch size 2 |
-| `--resolution` | `512` | 256 or 512 |
-| `--batch_size` × `--grad_accum_steps` | 8 × 8 per GPU | batch 256 on 4 GPUs |
-| `--sample_step`, `--step_size`, `--noise_std` | 40, 500, 0.05 | training sampler |
-| `--clip_norm` | 100 at 256px, 200 at 512px | latent-norm clipping |
-| `--buffer_size`, `--replay_probability` | 4000 per GPU, 0.99 | replay buffer (16,000 in total on 4 GPUs) |
-| `--alpha` | 1.0 | λ, energy L2 regularization |
-| `--kl`, `--kl_coeff` | on, 1.0 | sampler matching, energy term (λ₁) |
-| `--repel_im`, `--repel_coeff` | on, 0.3 | sampler matching, nearest-neighbor entropy term |
-| `--pra`, `--pra_coeff` | on, 0.5 | PRA (λ₂) |
-| `--pra_layer` | block at 1/3 depth | where PRA is attached |
-| `--pra_gamma` | 0.6 | spatial normalization of the DINOv2 targets |
-| `--num_energy_heads` | 3 | 1, 2 or 3 heads |
-| `--cond_dropout_prob` | 0 | set to 0.15 for an unconditional energy (used for OOD detection) |
-| `--max_steps` | 0 (run until stopped) | see note below |
-| `--use_wandb` | true | Weights & Biases logging |
+
 
 **Steps.** The step counter (checkpoint names, `--max_steps`, logging intervals) counts micro-batches. With the defaults, one micro-batch is 32 images across 4 GPUs, so the paper's 50K iterations at batch 256 correspond to `--max_steps 400000`.
 
@@ -116,16 +99,6 @@ The samples are saved in the format of the [ADM evaluation suite](https://github
 # 1. Generate 50K samples -> samples/<run>_<step>_s60_n50000.npz
 torchrun --nproc_per_node=4 --standalone inference.py \
     --checkpoint /path/to/model_step_N.pth --model_size XL --resolution 256
-```
-
-Sampling 50K images with 60 steps takes about an hour on one H200. At 512×512 the `.npz` is about 39 GB.
-
-```bash
-# 2. Score with the ADM evaluator (needs TensorFlow; a separate environment is easiest)
-git clone https://github.com/openai/guided-diffusion.git
-pip install -r guided-diffusion/evaluations/requirements.txt
-wget https://openaipublic.blob.core.windows.net/diffusion/jul-2021/ref_batches/imagenet/256/VIRTUAL_imagenet256_labeled.npz
-python guided-diffusion/evaluations/evaluator.py VIRTUAL_imagenet256_labeled.npz samples/<name>.npz
 ```
 
 **Inference-time scaling.** No retraining is needed: increase `--total_langevin_steps` (e.g. 40 → 60 → 80) or `--step_size` (e.g. 500 → 1000) to move along the fidelity–diversity curve.
