@@ -1,0 +1,20 @@
+name: tem
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu126
+      - torch==2.7.1
+      - torchvision==0.22.1
+      - numpy==2.1.3
+      - scipy==1.15.2
+      - pillow==12.2.0
+      - diffusers==0.34.0
+      - transformers==4.57.6
+      - huggingface-hub==0.34.6
+      - accelerate==1.15.0
+      - safetensors
+      - wandb==0.21.0
+      - tqdm==4.67.3

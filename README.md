@@ -93,7 +93,6 @@ Checkpoints are written atomically. A restarted job resumes automatically from t
 3. Each chain runs `--total_langevin_steps` steps (default 60). Its state after step 40 goes into the buffer, so the buffer stays matched to the training horizon.
 4. Every chain gets an independently sampled class label.
 
-The samples are saved in the format of the [ADM evaluation suite](https://github.com/openai/guided-diffusion/tree/main/evaluations): a single `.npz` with `arr_0` (uint8, N×H×W×3) and `arr_1` (class labels), plus a grid of 64 samples as a PNG.
 
 ```bash
 # 1. Generate 50K samples -> samples/<run>_<step>_s60_n50000.npz
@@ -114,4 +113,3 @@ torchrun --nproc_per_node=4 --standalone inference.py \
   year    = {2026}
 }
 ```
-# TEM

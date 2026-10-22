@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+checkpoints/
+fid_results/
+fid_stats/
+wandb/
+wandbcache/
+logs/
+*.pth
+*.npz
