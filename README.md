@@ -3,7 +3,7 @@
 **Jungsoo Lee<sup>1</sup>, Alexi Gladstone<sup>2</sup>, Yilun Du<sup>3</sup>**
 <sup>1</sup>MIT &nbsp; <sup>2</sup>UIUC &nbsp; <sup>3</sup>Harvard University
 
-[[Paper]](TODO) &nbsp; [[Project page]] https://int-lee.github.io/scalable-ebm/
+[[Paper]](https://arxiv.org/abs/2610.31889) &nbsp; [[Project page]](https://int-lee.github.io/scalable-ebm/)
 
 <!-- <p align="center"><img src="assets/teaser.png" width="90%"></p> -->
 
@@ -97,12 +97,25 @@ Inference-time scaling for TEM-XL/2 at 256×256 (step size 500):
   <img src="samples/imagenet_samples/single_steps_cls951_B_step120_every20/step0120.png" width="13%">
 </p>
 
-Pretrained checkpoints: TODO.
+### Pretrained checkpoint
+
+| Model | Resolution | Training | Download | SHA-256 |
+|---|---|---|---|---|
+| TEM-XL/2 (EMA weights) | 256×256 | 12.8M images | [Google Drive](https://drive.google.com/file/d/1xBJOjGM-Wrdr-hEUNAdLt9Kj__TKzLHs/view?usp=drive_link) (2.44 GB) | `02eee5f8d90a633055ae0441559ee5ae89928bc1cb4dfa931ae3bae2ba55e4f8` |
+
+```bash
+pip install gdown && gdown 1xBJOjGM-Wrdr-hEUNAdLt9Kj__TKzLHs     # -> TEM-XL-2_imagenet256_ema.pth
+sha256sum TEM-XL-2_imagenet256_ema.pth                           # should match the hash above
+torchrun --nproc_per_node=4 --standalone inference.py \
+    --checkpoint TEM-XL-2_imagenet256_ema.pth --model_size XL --resolution 256
+```
+
+The checkpoint records its energy-head layout, so `inference.py` needs no extra flags.
 
 ## Installation
 
 ```bash
-git clone TODO && cd TransformerEBM
+git clone https://github.com/int-lee/TEM.git && cd TEM
 conda env create -f environment.yml && conda activate tem
 # or, in an existing Python 3.10 environment (install the torch build for your CUDA first):
 pip install -r requirements.txt
@@ -174,10 +187,10 @@ torchrun --nproc_per_node=4 --standalone inference.py \
 ## Citation
 
 ```bibtex
-@article{lee2026tem,
-  title   = {Scaling Transformer Energy-Based Models for High Quality Image Synthesis},
-  author  = {Lee, Jungsoo and Gladstone, Alexi and Du, Yilun},
-  journal = {arXiv preprint arXiv:TODO},
-  year    = {2026}
+@article{lee2026scaling,
+  title         = {Scaling Transformer Energy-Based Models for High Quality Image Synthesis},
+  author        = {Lee, Jungsoo and Gladstone, Alexi and Du, Yilun},
+  journal       = {arXiv preprint arXiv:2610.31889},
+  year          = {2026},
 }
 ```
