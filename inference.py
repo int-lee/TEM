@@ -6,7 +6,7 @@ Persistent-chain sampling (per GPU):
   2. Each batch runs `total_langevin_steps` Langevin steps for random class labels;
      after `mid_step` steps the intermediate latents are pushed to the buffer.
   3. Until the buffer is full, chains start from pure noise; afterwards they start
-     from the buffer with probability `replay_probability` (noise otherwise)..
+     from the buffer with probability `replay_probability` (noise otherwise).
 
 Output: one .npz with
     arr_0 : uint8 [num_samples, H, W, 3]   (NHWC, as in ADM / DiT sample_ddp.py)
@@ -67,7 +67,7 @@ class SampleConfig:
 
     # --- Buffer ---
     buffer_size: int = 5000            # total across GPUs
-    replay_probability: float = 0.95   # P(init from buffer) once the buffer is full
+    replay_probability: float = 1.0    # P(init from buffer) once the buffer is full
 
     # --- Output ---
     num_samples: int = 50000
